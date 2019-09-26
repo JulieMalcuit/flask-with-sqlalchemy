@@ -1,6 +1,6 @@
 import os
 import logging
-logging.warn(os.environ["DUMMY"])
+#logging.warn(os.environ["DUMMY"])
 
 from flask import Flask
 from config import Config
@@ -18,7 +18,6 @@ ma = Marshmallow(app)
 @app.route('/hello')
 def hello():
     return "Hello World!"
-
 
 from models import Product
 from schemas import products_schema
