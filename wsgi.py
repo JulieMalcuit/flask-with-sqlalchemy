@@ -40,7 +40,7 @@ def add_product():
     db.session.commit()
     return "", 201
 
-@app.route('/products', methods=['UPDATE'])
+@app.route('/products', methods=['PATCH'])
 def update_product(post_id):
     product = Product()
     body = request.get_json()
@@ -48,7 +48,7 @@ def update_product(post_id):
         update({product.name: body["name"]}, synchronize_session=False)
     db.session.add(product)
     db.session.commit()
-    return "", 201
+    return "", 204
 
 @app.route('/products', methods=['POST'])
 def delete_product(post_id):
