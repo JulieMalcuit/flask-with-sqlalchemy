@@ -39,3 +39,17 @@ def add_product():
     db.session.add(product)
     db.session.commit()
     return "", 201
+
+@app.route('/products', methods=['UPDATE'])
+def update_product(post_id):
+    product = Product()
+    body = request.get_json()
+    db.session.query(Product).filter(Product.id == post_id).\
+        update({product.name: body["name"]}, synchronize_session=False)
+    db.session.add(product)
+    db.session.commit()
+    return "", 201
+
+@app.route('/products', methods=['POST'])
+def delete_product(post_id):
+    pass
