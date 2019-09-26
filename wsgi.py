@@ -2,7 +2,7 @@ import os
 import logging
 #logging.warn(os.environ["DUMMY"])
 
-from flask import Flask
+from flask import Flask, request, abort
 from config import Config
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -31,3 +31,10 @@ def read_product(post_id):
     product = db.session.query(Product).get(post_id)
     return products_schema_only.jsonify(product)
 
+@app.route('/products', methods=['POST'])
+def add_product():
+    product = Product()
+    product.name='toto'
+    db.session.add(product)
+    db.session.commit()
+    abort(201)
