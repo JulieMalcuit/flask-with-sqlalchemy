@@ -34,7 +34,7 @@ def read_product(post_id):
 @app.route('/products', methods=['POST'])
 def add_product():
     product = Product()
-    body = requests.get_json()
+    body = request.get_json()
     product.name = body["name"]
     db.session.add(product)
     db.session.commit()
