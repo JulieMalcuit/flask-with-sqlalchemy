@@ -6,7 +6,7 @@ class ProductSchema(ma.Schema):
         model = Product
         fields = ('id', 'name') # These are the fields we want in the JSON!
 
-product_schema = ProductSchema()
-products_schema = ProductSchema(many=True)
+product_schema = ProductSchema()  # python object -> json
+products_schema = ProductSchema(many=True)  # list python objects -> json
 
 
