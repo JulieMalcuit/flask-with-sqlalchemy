@@ -10,19 +10,19 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy(app)
 from models import Product
 
-from flask_sqlalchemy import SQLAlchemy
-from flask_marshmallow import Marshmallow
-db = SQLAlchemy(app)
-ma = Marshmallow(app)
-
-@app.route('/hello')
+@app.route('/')
 def hello():
     return "Hello World!"
 
 from models import Product
 from schemas import products_schema
 
+from flask_sqlalchemy import SQLAlchemy
+from flask_marshmallow import Marshmallow
+db = SQLAlchemy(app)
+ma = Marshmallow(app)
+
 @app.route('/products')
 def products():
-    products = db.session.query(Product).all() # SQLAlchemy request => 'SELECT * FROM products'
+    products = db.session.query(Product).all()
     return products_schema.jsonify(products)
