@@ -24,17 +24,18 @@ def products():
     products = db.session.query(Product).all()
     return products_schema.jsonify(products)
 
-from schemas import products_schema_only
+from schemas import product_schema
 
 @app.route('/products/<int:post_id>', methods=['GET'])
 def read_product(post_id):
     product = db.session.query(Product).get(post_id)
-    return products_schema_only.jsonify(product)
+    return product_schema.jsonify(product)
+
 
 @app.route('/products', methods=['POST'])
 def add_product():
     product = Product()
-    product.name='toto'
+    product.name = "New"
     db.session.add(product)
     db.session.commit()
     abort(201)
