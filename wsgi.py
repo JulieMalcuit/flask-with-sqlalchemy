@@ -6,14 +6,15 @@ from flask import Flask
 from config import Config
 app = Flask(__name__)
 app.config.from_object(Config)
+
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy(app)
 
-from models import Product
-from schemas import products_schema
-
 from flask_marshmallow import Marshmallow
 ma = Marshmallow(app)
+
+from models import Product
+from schemas import products_schema
 
 @app.route('/')
 def hello():
