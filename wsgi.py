@@ -26,6 +26,7 @@ def products():
     return products_schema.jsonify(products)
 
 @app.route('/products/<int:post_id>', methods=['GET'])
-def read_product():
-    read_product = db.session.query(Product).get(post_id)
-    return products_schema.jsonify(read_product)
+def read_product(post_id):
+    product = db.session.query(Product).get(post_id)
+    return products_schema.jsonify(product)
+
