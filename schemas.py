@@ -10,7 +10,3 @@ product_schema = ProductSchema()
 products_schema = ProductSchema(many=True)
 
 
-#product_schema_only = ProductSchema()
-#products_schema_only = ProductSchema(many=False)
-
-

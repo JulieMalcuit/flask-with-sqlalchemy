@@ -31,11 +31,11 @@ def read_product(post_id):
     product = db.session.query(Product).get(post_id)
     return product_schema.jsonify(product)
 
-
 @app.route('/products', methods=['POST'])
 def add_product():
     product = Product()
-    product.name = "New"
+    body = requests.get_json()
+    product.name = body["name"]
     db.session.add(product)
     db.session.commit()
-    abort(201)
+    return "", 201
