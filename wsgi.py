@@ -8,19 +8,16 @@ app = Flask(__name__)
 app.config.from_object(Config)
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy(app)
-from models import Product
-
-@app.route('/')
-def hello():
-    return "Hello World!"
 
 from models import Product
 from schemas import products_schema
 
-from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
-db = SQLAlchemy(app)
 ma = Marshmallow(app)
+
+@app.route('/')
+def hello():
+    return "Hello World!"
 
 @app.route('/products')
 def products():
