@@ -40,16 +40,16 @@ def add_product():
     db.session.commit()
     return "", 201
 
-@app.route('/products', methods=['PATCH'])
-def update_product(post_id):
-    product = Product()
-    body = request.get_json()
-    db.session.query(Product).filter(Product.id == post_id).\
-        update({product.name: body["name"]}, synchronize_session=False)
-    db.session.add(product)
+@app.route('/products/<int:post_id>', methods=['DELETE'])
+def delete_product(post_id):
+    product_del=db.session.query(Product).get(post_id)
+    db.session.delete(product_del)
     db.session.commit()
     return "", 204
 
-@app.route('/products', methods=['POST'])
-def delete_product(post_id):
-    pass
+@app.route('/products/<int:post_id>', methods=['PATCH'])
+def update_product(post_id):
+    body = request.get_json()
+    db.session.query(Product).filter(Product.id == post_id).update({Product.name: body["name"]})
+    db.session.commit()
+    return product_schema.jsonify(db.session.query(Product).get(post_id))
