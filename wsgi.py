@@ -1,4 +1,4 @@
-from flask import Flask, request, abort
+from flask import Flask, request, abort, render_template
 from config import Config
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -13,8 +13,14 @@ from models import Product
 from schemas import products_schema, product_schema
 
 @app.route('/')
-def hello():
-    return "Hello World!"
+def home():
+    products = db.session.query(Product).all()
+    return render_template('home.html', products=products)
+
+@app.route('/<int:id>')
+def product_html(id):
+    product = db.session.query(Product).get(id)
+    return render_template('product.html', product=product)
 
 @app.route('/products', methods=['GET'])  # GET / products
 def read_products():
